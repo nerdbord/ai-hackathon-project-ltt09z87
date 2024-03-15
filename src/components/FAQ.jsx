@@ -18,7 +18,7 @@ export const FAQ = () => {
   return (
     <>
       <label htmlFor="my_modal_7" className="btn">
-        open modal
+        open FAQ
       </label>
       <input type="checkbox" id="my_modal_7" className="modal-toggle" />
       <div className="modal" role="dialog">
