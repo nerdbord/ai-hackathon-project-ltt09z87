@@ -11,6 +11,11 @@ const FAQ = ({ isOpen, handleClose }) => {
       header: "Często zadawane pytanie 2",
       description: "Odpowiedź na często zadawane pytanie 2 znajduje się tutaj.",
     },
+    {
+        header: "Często zadawane pytanie 3",
+        description: "Odpowiedź na często zadawane pytanie 2 znajduje się tutaj.",
+      },
+    
   ];
 
   return (

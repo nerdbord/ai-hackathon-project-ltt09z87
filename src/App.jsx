@@ -17,7 +17,7 @@ const App = () => {
       {!isOpen && (
         <button onClick={handleToggleFAQ}>Otwórz FAQ</button>
       )}
-      
+
     </div>
   );
 };
