@@ -23,7 +23,7 @@ const FAQ = ({ isOpen, handleClose }) => {
       {isOpen && (
         <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50" onClick={handleClose}>
           <div className="bg-gray-800 rounded-lg shadow-lg max-w-md w-full overflow-y-auto max-h-full p-4 text-center" onClick={(e) => e.stopPropagation()}>
-            <button className="absolute top-0 right-0 p-2" onClick={handleClose}>x</button>
+            <button onClick={handleClose}>x</button>
             <h1 className="text-slate-400 text-2xl font-bold mb-4">Najczęściej zadawane pytania</h1>
             {faqs.map((faq, index) => (
               <SingleFAQ key={index} header={faq.header} description={faq.description} />
