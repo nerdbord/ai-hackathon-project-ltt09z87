@@ -4,6 +4,7 @@ import { SelectInput } from './components/SelectInput';
 import {FAQ} from './components/FAQ';
 import {Loader} from './components/Loader';
 import {useState,useEffect} from "react";
+import SearchComponent from './components/SearchComponent';
 
 
 
@@ -13,7 +14,7 @@ const [isLoading, setIsLoading] = useState(true);
 useEffect(() => {
   setTimeout(() => {
     setIsLoading(false);
-  }, 1000);
+  }, 1);
 }, []);
 
   return (
@@ -24,6 +25,7 @@ useEffect(() => {
       <MainLayout>
       <SelectInput/>
 	    <FAQ/> 
+      <SearchComponent />
       </MainLayout>
        )}
 		</>
