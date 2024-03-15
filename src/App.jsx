@@ -1,18 +1,15 @@
-import './App.css'
-import { MainLayout } from './components/MainLayout';
-import { SelectInput } from './components/SelectInput';
-import {FAQ} from './components/FAQ';
-import {useState} from "react";
+import "./App.css";
+import { MainLayout } from "./components/MainLayout";
+import AiAccurate from "./components/AiAccurate.jsx";
 
 function App() {
   return (
-		<>
+    <>
       <MainLayout>
-      <SelectInput/>
-	    <FAQ/> 
+        <AiAccurate />
       </MainLayout>
-		</>
-	);
+    </>
+  );
 }
 
-export default App
+export default App;
