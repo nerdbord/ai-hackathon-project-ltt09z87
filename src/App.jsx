@@ -1,25 +1,19 @@
-// App.js
+import './App.css'
 import React, { useState } from 'react';
-import FAQ from './assets/components/FAQ';
+import { MainLayout } from './components/MainLayout';
+import { SelectInput } from './components/SelectInput';
+import {FAQ} from './components/FAQ';
 
-const App = () => {
-  //FAQ OPEN
-  const [isOpen, setIsOpen] = useState(false);
-  const handleToggleFAQ = () => {
-    setIsOpen(!isOpen);
-  };
-  //FAQ
 
+function App() {
   return (
-    <div className="App">
+		<>
+      <MainLayout>
+      <SelectInput/>
+	    <FAQ/> 
+      </MainLayout>
+		</>
+	);
+}
 
-      <FAQ isOpen={isOpen} handleClose={handleToggleFAQ} />
-      {!isOpen && (
-        <button onClick={handleToggleFAQ}>Otwórz FAQ</button>
-      )}
-
-    </div>
-  );
-};
-
-export default App;
+export default App
