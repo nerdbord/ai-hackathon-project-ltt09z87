@@ -1,12 +1,13 @@
 import './App.css'
 import { MainLayout } from './components/MainLayout';
+import { SelectInput } from './components/SelectInput';
 
 function App() {
 
   return (
 		<>
       <MainLayout>
-        <p>hello world</p>
+        <SelectInput/>
       </MainLayout>
 		</>
 	);
