@@ -2,13 +2,31 @@ import "./App.css";
 import { MainLayout } from "./components/MainLayout";
 import AiAccurate from "./components/AiAccurate.jsx";
 import FormComponent from "./components/FormComponent/FormComponent.jsx";
+import { useState } from "react";
+import { SelectInput } from "./components/SelectInput.jsx";
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+  const [showSelect, setShowSelect] = useState(false);
+  const [showAccurate, setShowAccurate] = useState(true);
+
+  const handleAccurate = (answer) => {
+    if (answer === "Tak") {
+      setShowForm(true);
+      setShowAccurate(false);
+    }
+    if (answer === "Nie") {
+      setShowSelect(true);
+      setShowAccurate(false);
+    }
+  };
+
   return (
     <>
       <MainLayout>
-        {/*<AiAccurate />*/}
-        <FormComponent />
+        {showAccurate && <AiAccurate handleAccurate={handleAccurate} />}
+        {showForm && <FormComponent />}
+        {showSelect && <SelectInput />}
       </MainLayout>
     </>
   );
