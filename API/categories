@@ -1,0 +1,12 @@
+export const categories =  [
+    "Clothing and Footwear",
+    "Electronics",
+    "Beauty and Health",
+    "Home and Garden",
+    "Hobbies",
+    "Kids",
+    "Food",
+    // "Books and Media",
+    // "Jewelry and Watches",
+    // "Pet Supplies"
+]
