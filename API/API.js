@@ -1,2 +1,2 @@
-export const API_KEY =
-	'4bebe73e0e37a06315d78e10c5c8c2f8abfd5e5b7f4112b12fdc7bef19cdc5af47ab1bc43b5300a231b9a1cd05f07ef6b7bd5b59f7fb2df6a098b0ef74cd784c';
+const API_KEY = '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';
+export default API_KEY;

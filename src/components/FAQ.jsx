@@ -1,5 +1,5 @@
 // FAQ
-import React from "react";
+
 const faqs = [
   {
     header: "Często zadawane pytanie 1",
