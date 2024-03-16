@@ -1,32 +1,34 @@
-import "./App.css";
-import { MainLayout } from "./components/MainLayout";
-import AiAccurate from "./components/AiAccurate.jsx";
-import FormComponent from "./components/FormComponent/FormComponent.jsx";
-import { useEffect, useState } from "react";
-import { SelectInput } from "./components/SelectInput.jsx";
+import './App.css'
+import { MainLayout } from './components/MainLayout'
+import AiAccurate from './components/AiAccurate.jsx'
+import FormComponent from './components/FormComponent/FormComponent.jsx'
+import { useEffect, useState } from 'react'
+import { SelectInput } from './components/SelectInput.jsx'
 // import FetchDataComponent from "./components/ApiTest.jsx";
 function App() {
-  const [showForm, setShowForm] = useState(false);
-  const [showSelect, setShowSelect] = useState(false);
-  const [showAccurate, setShowAccurate] = useState(true);
+  const [showForm, setShowForm] = useState(false)
+  const [showSelect, setShowSelect] = useState(false)
+  const [showAccurate, setShowAccurate] = useState(true)
+
+  const [auctionTitle, setAuctionTitle] = useState('')
 
   const handleAccurate = (answer) => {
     if (answer) {
-      setShowForm(true);
-      setShowAccurate(false);
+      setShowForm(true)
+      setShowAccurate(false)
     } else {
-      setShowSelect(true);
-      setShowAccurate(false);
+      setShowSelect(true)
+      setShowAccurate(false)
     }
-  };
+  }
+
   useEffect(() => {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      if (message.action === "title") {
-        const title = message.title;
-        console.log("Tytuł strony:", title);
+    chrome.runtime.onMessage.addListener((message) => {
+      if (message.action === 'title') {
+        setAuctionTitle(message.title)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <>
@@ -37,7 +39,7 @@ function App() {
         {/* <FetchDataComponent/> */}
       </MainLayout>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
