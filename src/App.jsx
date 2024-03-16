@@ -22,13 +22,13 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    chrome.runtime.onMessage.addListener((message) => {
-      if (message.action === 'title') {
-        setAuctionTitle(message.title)
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   chrome.runtime.onMessage.addListener((message) => {
+  //     if (message.action === 'title') {
+  //       setAuctionTitle(message.title)
+  //     }
+  //   })
+  // }, [])
 
   return (
     <>
