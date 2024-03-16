@@ -50,3 +50,9 @@ Dezyzyjnik to innowacyjna aplikacja oparta na technologii React oraz wykorzystuj
 - **API GPT-3.5:** Aplikacja korzysta z zaawansowanego interfejsu programistycznego (API) GPT-3.5, który zapewnia potężne możliwości sztucznej inteligencji, niezbędne do analizy odpowiedzi użytkowników.
   
 - **HTML:** Struktura aplikacji została zdefiniowana przy użyciu języka znaczników HTML, zapewniając semantyczną strukturę dokumentu.
+
+### Problem rozwiązywany przez aplikację:
+
+AllegroDecide została stworzona w celu rozwiązania problemu podejmowania świadomych decyzji zakupowych na platformie Allegro. W dzisiejszym zatłoczonym rynku e-commerce, użytkownicy często napotykają trudności w wyborze najlepszego produktu spośród wielu opcji dostępnych na platformie Allegro. 
+
+Nasza aplikacja adresuje ten problem, oferując spersonalizowane rekomendacje oparte na preferencjach i oczekiwaniach użytkownika. Dzięki wykorzystaniu zaawansowanych technologii, takich jak sztuczna inteligencja oraz analiza danych, AllegroDecide pomaga użytkownikom dokonać bardziej przemyślanych decyzji zakupowych, eliminując niepewność i ułatwiając znalezienie idealnego produktu, który najlepiej odpowiada ich potrzebom.
