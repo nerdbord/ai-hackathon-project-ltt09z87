@@ -1,4 +1,16 @@
-## Decyzyjnik
+## Nazwa Projektu
+
+> Decyzyjnik
+
+### Spis treści
+* [Wstęp](#O-aplikacji)
+* [Funkcje](#Funkcje:)
+* [Jak to działa](#Jak-to-działa:)
+* [Korzyści](#Korzyści:)
+* [Technologie](#Technologie:)
+* [Podsumowanie](#Problem-rozwiązywany-przez-aplikację:)
+
+### O aplikacji
 
 Decyzyjnik to innowacyjna aplikacja oparta na technologii React oraz wykorzystująca potężne możliwości API GPT-3.5. Została stworzona z myślą o użytkownikach serwisu Allegro, aby pomóc im podejmować bardziej świadome decyzje zakupowe.
 
