@@ -4,6 +4,7 @@ import AiAccurate from './components/AiAccurate.jsx'
 import FormComponent from './components/FormComponent/FormComponent.jsx'
 import { useEffect, useState } from 'react'
 import { SelectInput } from './components/SelectInput.jsx'
+import { Summary } from './components/Summary.jsx'
 // import FetchDataComponent from "./components/ApiTest.jsx";
 function App() {
   const [showForm, setShowForm] = useState(false)
@@ -33,10 +34,11 @@ function App() {
   return (
     <>
       <MainLayout>
-        {showAccurate && <AiAccurate handleAccurate={handleAccurate} />}
-        {showForm && <FormComponent />}
-        {showSelect && <SelectInput />}
+        {/* {showAccurate && <AiAccurate handleAccurate={handleAccurate} />} */}
+        {/* {showForm && <FormComponent />} */}
+        {/* {showSelect && <SelectInput />} */}
         {/* <FetchDataComponent/> */}
+        <Summary />
       </MainLayout>
     </>
   )
