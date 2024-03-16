@@ -16,6 +16,7 @@ async function assignCategoryViaChat(content) {
   try {
     const product = await openaiAPI.post('', {
       model: 'gpt-3.5-turbo',
+      temperature: 0,
       messages: [
         {
           role: 'system',
@@ -27,10 +28,11 @@ async function assignCategoryViaChat(content) {
         },
       ],
     })
-    console.log(JSON.parse(product.data.choices[0].message.content).whatIsIt);
-    
+    console.log(JSON.parse(product.data.choices[0].message.content).whatIsIt)
+
     const response = await openaiAPI.post('', {
       model: 'gpt-3.5-turbo',
+      temperature: 0,
       messages: [
         {
           role: 'system',
@@ -43,6 +45,43 @@ async function assignCategoryViaChat(content) {
       ],
     })
 
+    return JSON.parse(response.data.choices[0].message.content)
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
+//{product: string,
+//formdata: ARRAY<{question: string, anserw: string}>}
+
+async function itsWorthToBuy( product, formData ) {
+  const systemPrompt = `You are a helpful shooping assistant. You assist users in making informed purchases. Return only stringify JSON. Response is a object according the structure: {rating: number, pros: array of strings, cons: array of strings}. Pros and Cons in Polish. Based on the form submitted by the user assess whether he should buy product. Rate that on a scale of 1 to 5 (use only intigers) and say somthing. List the pros and cons of the purchase (max 3 pros and 3 cons). Short sentences, max 100 characters per point.`
+
+  const userPrompt = `Product: ### ${product} ###,
+  User Form: ### ${formData.map(
+    (question) => `Question: ${question.question}.
+    User Anserw: ${question.anserw}
+  `
+  )} ###`
+
+  console.log(userPrompt)
+
+  try {
+    const response = await openaiAPI.post('', {
+      model: 'gpt-3.5-turbo',
+      temperature: 1.2,
+      messages: [
+        {
+          role: 'system',
+          content: systemPrompt,
+        },
+        {
+          role: 'user',
+          content: userPrompt,
+        },
+      ],
+    })
+
     console.log('DATA', response.data.choices[0].message.content)
 
     return response.data
@@ -51,4 +90,4 @@ async function assignCategoryViaChat(content) {
   }
 }
 
-export { assignCategoryViaChat }
+export { assignCategoryViaChat, itsWorthToBuy }
