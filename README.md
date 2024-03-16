@@ -3,12 +3,12 @@
 > Decyzyjnik
 
 ### Spis treści
-* [Wstęp](###O-aplikacji)
-* [Funkcje](###Funkcje:)
-* [Jak to działa](###Jak-to-działa:)
-* [Korzyści](###Korzyści:)
-* [Technologie](###Technologie:)
-* [Podsumowanie](###Problem-rozwiązywany-przez-aplikację:)
+* [Wstęp](#O-aplikacji)
+* [Funkcje](#Funkcje:)
+* [Jak to działa](#Jak-to-działa:)
+* [Korzyści](#Korzyści:)
+* [Technologie](#Technologie:)
+* [Podsumowanie](#Problem-rozwiązywany-przez-aplikację:)
 
 ### O aplikacji
 
