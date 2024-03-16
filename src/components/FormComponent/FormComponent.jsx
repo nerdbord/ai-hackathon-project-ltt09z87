@@ -73,7 +73,7 @@ const FormComponent = () => {
   return (
     <div className="flex flex-col h-full items-center gap-y-6">
       {isLoading && (
-        <span className="loading loading-spinner text-success"></span>
+        <span className="loading loading-spinner text-success w-20 h-20"></span>
       )}
       {gptAnswer && <p>{gptAnswer}</p>}
       {showForm && (
