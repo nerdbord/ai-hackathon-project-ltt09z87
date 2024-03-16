@@ -11,11 +11,10 @@ function App() {
   const [showAccurate, setShowAccurate] = useState(true);
 
   const handleAccurate = (answer) => {
-    if (answer === "Tak") {
+    if (answer) {
       setShowForm(true);
       setShowAccurate(false);
-    }
-    if (answer === "Nie") {
+    } else {
       setShowSelect(true);
       setShowAccurate(false);
     }

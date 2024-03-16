@@ -9,11 +9,11 @@ const AiAccurate = ({ handleAccurate }) => {
       <div className="flex gap-x-2">
         <button
           className="btn btn-success"
-          onClick={() => handleAccurate("Tak")}
+          onClick={() => handleAccurate(true)}
         >
           Tak
         </button>
-        <button className="btn btn-error" onClick={() => handleAccurate("Nie")}>
+        <button className="btn btn-error" onClick={() => handleAccurate(false)}>
           Nie
         </button>
       </div>
