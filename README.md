@@ -1,5 +1,5 @@
 ![Static Badge](https://img.shields.io/badge/React-18.2.0-blue) ![Static Badge](https://img.shields.io/badge/Tailwindcss-3.4.1-green)
-# Projekt: Decyzyjnik 
+# Aplikacja Decyzyjnik 
 
 ## Spis treści
 * [O aplikacji](#o-aplikacji)
