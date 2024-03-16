@@ -1,4 +1,3 @@
-
 import GPTRED from '../assets/gptred.svg'
 import GPTGREEN from '../assets/gptgreen.svg'
 
@@ -18,8 +17,6 @@ export const Summary = () => {
       ],
     },
   ]
-
-  console.log(gptAnswer[0].rating)
 
   const mergeProsAndCons = (pros, cons) => {
     const merged = []
@@ -73,41 +70,16 @@ export const Summary = () => {
 
       <p>Ocena zakupu:</p>
       <div className="rating">
-        <input
-          type="radio"
-          name="rating-2"
-          className="mask mask-star-2 bg-orange-400 cursor-default"
-          checked={gptAnswer[0].rating === 1 ? true : false}
-          disabled
-        />
-        <input
-          type="radio"
-          name="rating-2"
-          className="mask mask-star-2 bg-orange-400 cursor-default"
-          checked={gptAnswer[0].rating === 2 ? true : false}
-          disabled
-        />
-        <input
-          type="radio"
-          name="rating-2"
-          className="mask mask-star-2 bg-orange-400 cursor-default"
-          disabled
-          checked={gptAnswer[0].rating === 3 ? true : false}
-        />
-        <input
-          type="radio"
-          name="rating-2"
-          className="mask mask-star-2 bg-orange-400 cursor-default"
-          checked={gptAnswer[0].rating === 4 ? true : false}
-          disabled
-        />
-        <input
-          type="radio"
-          name="rating-2"
-          className="mask mask-star-2 bg-orange-400 cursor-default"
-          checked={gptAnswer[0].rating === 5 ? true : false}
-          disabled
-        />
+        {[1, 2, 3, 4, 5].map((rating) => (
+          <input
+            key={rating}
+            type="radio"
+            name="rating-2"
+            className="mask mask-star-2 bg-orange-400 cursor-default"
+            checked={gptAnswer[0].rating === rating}
+            disabled
+          />
+        ))}
       </div>
     </div>
   )

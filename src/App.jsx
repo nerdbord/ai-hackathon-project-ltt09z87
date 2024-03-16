@@ -34,11 +34,11 @@ function App() {
   return (
     <>
       <MainLayout>
-        {/* {showAccurate && <AiAccurate handleAccurate={handleAccurate} />} */}
-        {/* {showForm && <FormComponent />} */}
-        {/* {showSelect && <SelectInput />} */}
+        {showAccurate && <AiAccurate handleAccurate={handleAccurate} />}
+        {showForm && <FormComponent />}
+        {showSelect && <SelectInput />}
         {/* <FetchDataComponent/> */}
-        <Summary />
+        {/*<Summary />*/}
       </MainLayout>
     </>
   )

@@ -1,73 +1,74 @@
-import { useForm } from "react-hook-form";
-import FormSteps from "./FormSteps.jsx";
-import { useState } from "react";
-import API_KEY from "../../../API/API.js";
+import { useForm } from 'react-hook-form'
+import FormSteps from './FormSteps.jsx'
+import { useState } from 'react'
+import API_KEY from '../../../API/API.js'
+import { Summary } from '../Summary.jsx'
 
-const answers = [];
+const answers = []
 
 const FormComponent = () => {
   // eslint-disable-next-line no-unused-vars
-  const [isLoading, setIsLoading] = useState(false);
-  const [showForm, setShowForm] = useState(true);
+  const [isLoading, setIsLoading] = useState(false)
+  const [showForm, setShowForm] = useState(true)
   const [question, setQuestion] = useState([
-    "Czy posiadasz już ten produkt?",
-    "Czy zakup tego produktu zagrozi twojemu budżetowi?",
-    "Czy jest on niezbędny dla Ciebie?",
-    "Czy sprawdziłeś opinie na temat tego produktu w internecie?",
-    "W skali od 1 do 10 jak bardzo uważasz ten produkt za niezbedny?",
-  ]);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [gptAnswer, setGptAnswer] = useState("");
+    'Czy posiadasz już ten produkt?',
+    'Czy zakup tego produktu zagrozi twojemu budżetowi?',
+    'Czy jest on niezbędny dla Ciebie?',
+    'Czy sprawdziłeś opinie na temat tego produktu w internecie?',
+    'W skali od 1 do 10 jak bardzo uważasz ten produkt za niezbedny?',
+  ])
+  const [currentStep, setCurrentStep] = useState(0)
+  const [gptAnswer, setGptAnswer] = useState('')
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm()
 
   const onSubmit = (data) => {
-    reset();
+    reset()
     if (currentStep < 5) {
-      setCurrentStep(currentStep + 1);
-      answers.push(data);
+      setCurrentStep(currentStep + 1)
+      answers.push(data)
     }
     if (currentStep >= 4) {
-      fetchGptResponse();
+      fetchGptResponse()
     }
-  };
+  }
 
   async function fetchGptResponse() {
-    const OPENAI_API_KEY = API_KEY;
-    setIsLoading(true);
-    setShowForm(false);
+    const OPENAI_API_KEY = API_KEY
+    setIsLoading(true)
+    setShowForm(false)
     try {
       const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
+        'https://api.openai.com/v1/chat/completions',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${OPENAI_API_KEY}`,
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: 'gpt-3.5-turbo',
             messages: [
               {
-                role: "user",
+                role: 'user',
                 content: `Witaj, mam zamiar kupic ${answers[0]}, ten produkt ${answers[1]} mojemu budżetowi. ${question[2]} jest niezbędny dla mnie. ${answers[3]} sprawdziłem opinie w internecie. W skali od 1 do 10 ważność tego produktu dla mnie oceniam na ${answers[4]}, na podstawie tych informacji prosze odpowiedz mi w kilku punktach za i przeciw zakupowi tego produktu.`,
               },
             ],
           }),
-        },
-      );
+        }
+      )
 
-      const data = await response.json();
-      setGptAnswer(data.choices[0].message.content);
+      const data = await response.json()
+      setGptAnswer(data.choices[0].message.content)
     } catch (error) {
-      console.error("Błąd:", error);
+      console.error('Błąd:', error)
     }
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   return (
@@ -75,7 +76,7 @@ const FormComponent = () => {
       {isLoading && (
         <span className="loading loading-spinner text-success w-20 h-20"></span>
       )}
-      {gptAnswer && <p>{gptAnswer}</p>}
+      {gptAnswer && <Summary />}
       {showForm && (
         <>
           <FormSteps currentStep={currentStep} />
@@ -85,7 +86,7 @@ const FormComponent = () => {
             className="flex flex-col w-full gap-y-4"
           >
             <textarea
-              {...register("answer", { required: true })}
+              {...register('answer', { required: true })}
               className="textarea textarea-bordered"
               placeholder="Napisz odpowiedź na pytanie..."
             ></textarea>
@@ -97,7 +98,7 @@ const FormComponent = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FormComponent;
+export default FormComponent
