@@ -102,7 +102,12 @@ const FormComponent = ({ setShowSummary }) => {
       setGptAnswer(parsedData)
       console.log(gptAnswer)
     } catch (error) {
-      console.error('Błąd:', error)
+      alert("Api problem try again")
+      setIsLoading(false);
+      setGptAnswer('');
+      setCurrentAnswer('');
+      setShowForm(true);
+      setCurrentStep(0);
     }
     setIsLoading(false)
   }
