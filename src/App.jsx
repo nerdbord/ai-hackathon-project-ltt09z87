@@ -4,6 +4,7 @@ import FormComponent from './components/FormComponent/FormComponent.jsx'
 import { useEffect, useState } from 'react'
 import { SelectInput } from './components/SelectInput.jsx'
 import { Summary } from './components/Summary.jsx'
+import './App.css'
 // import FetchDataComponent from "./components/ApiTest.jsx";
 function App() {
   const [showForm, setShowForm] = useState(false)
