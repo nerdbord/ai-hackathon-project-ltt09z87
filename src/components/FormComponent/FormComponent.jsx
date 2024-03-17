@@ -6,7 +6,7 @@ import { Summary } from '../Summary.jsx'
 
 const answers = []
 
-const FormComponent = () => {
+const FormComponent = ({ setShowSummary }) => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
   const [showForm, setShowForm] = useState(true)
