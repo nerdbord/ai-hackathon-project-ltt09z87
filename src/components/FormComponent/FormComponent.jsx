@@ -26,25 +26,24 @@ const FormComponent = ({ setShowSummary }) => {
   const [gptAnswer, setGptAnswer] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [currentAnswer, setCurrentAnswer] = useState('')
-   const [auctionTitle, setAuctionTitle] = useState("");
+  const [auctionTitle, setAuctionTitle] = useState('')
 
   useEffect(() => {
-    fetchAuctionTitle();
-  }, []); 
+    fetchAuctionTitle()
+  }, [])
 
   const fetchAuctionTitle = async () => {
     try {
-      const response = await fetch('https://kamil-banaszek.pl/projekt/pobierz');
+      const response = await fetch('https://kamil-banaszek.pl/projekt/pobierz')
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok')
       }
-      const data = await response.json();
-      setAuctionTitle(data.nazwa);
+      const data = await response.json()
+      setAuctionTitle(data.nazwa)
     } catch (error) {
-      console.error('There was a problem fetching the auction title:', error);
+      console.error('There was a problem fetching the auction title:', error)
     }
-  };
-
+  }
 
   const {
     register,
@@ -76,6 +75,7 @@ const FormComponent = ({ setShowSummary }) => {
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener((message) => {
+      console.log(message)
       if (message.action === 'title') {
         setAuctionTitle(message.title)
       }
@@ -118,12 +118,12 @@ const FormComponent = ({ setShowSummary }) => {
       setGptAnswer(parsedData)
       console.log(gptAnswer)
     } catch (error) {
-      alert("Api problem try again")
-      setIsLoading(false);
-      setGptAnswer('');
-      setCurrentAnswer('');
-      setShowForm(true);
-      setCurrentStep(0);
+      alert('Api problem try again')
+      setIsLoading(false)
+      setGptAnswer('')
+      setCurrentAnswer('')
+      setShowForm(true)
+      setCurrentStep(0)
     }
     setIsLoading(false)
   }
