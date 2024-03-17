@@ -11,7 +11,7 @@ function App() {
   const [showSelect, setShowSelect] = useState(false)
   const [showAccurate, setShowAccurate] = useState(true)
 
-  const [auctionTitle, setAuctionTitle] = useState('')
+
 
   const handleAccurate = (answer) => {
     if (answer) {
@@ -23,13 +23,7 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   chrome.runtime.onMessage.addListener((message) => {
-  //     if (message.action === 'title') {
-  //       setAuctionTitle(message.title)
-  //     }
-  //   })
-  // }, [])
+
 
   return (
     <>

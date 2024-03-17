@@ -10,33 +10,56 @@ const FormComponent = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
   const [showForm, setShowForm] = useState(true)
+  // eslint-disable-next-line no-unused-vars
   const [question, setQuestion] = useState([
-    'Czy posiadasz już ten produkt?',
-    'Czy zakup tego produktu zagrozi twojemu budżetowi?',
-    'Czy jest on niezbędny dla Ciebie?',
-    'Czy sprawdziłeś opinie na temat tego produktu w internecie?',
-    'W skali od 1 do 10 jak bardzo uważasz ten produkt za niezbedny?',
+    'Czy jest Ci to naprawdę potrzebne?',
+    'Czy stać Cię na to bez nadszarpnięcia budżetu?',
+    'Czy przeprowadziłeś wystarczający research?',
+    'Czy produkt jest wysokiej jakości?',
+    'Czy mogę znaleźć lepszą ofertę gdzie indziej?',
   ])
   const [currentStep, setCurrentStep] = useState(0)
   const [gptAnswer, setGptAnswer] = useState('')
+  // eslint-disable-next-line no-unused-vars
+  const [currentAnswer, setCurrentAnswer] = useState('')
+  const [auctionTitle, setAuctionTitle] = useState('Pralka')
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
+    clearErrors,
   } = useForm()
 
   const onSubmit = (data) => {
-    reset()
-    if (currentStep < 5) {
-      setCurrentStep(currentStep + 1)
-      answers.push(data)
-    }
-    if (currentStep >= 4) {
-      fetchGptResponse()
+    if (data.answer === 'Choose') {
+      setError('answer', {
+        type: 'manual',
+        message: 'Musisz wybrać odpowiedź!',
+      })
+    } else {
+      clearErrors('answer')
+      reset()
+      if (currentStep < 5) {
+        setCurrentStep(currentStep + 1)
+        answers.push(data)
+        console.log(answers)
+      }
+      if (currentStep >= 4) {
+        fetchGptResponse()
+      }
     }
   }
+
+  // useEffect(() => {
+  //   chrome.runtime.onMessage.addListener((message) => {
+  //     if (message.action === 'title') {
+  //       setAuctionTitle(message.title)
+  //     }
+  //   })
+  // }, [])
 
   async function fetchGptResponse() {
     const OPENAI_API_KEY = API_KEY
@@ -56,7 +79,11 @@ const FormComponent = () => {
             messages: [
               {
                 role: 'user',
-                content: `Witaj, mam zamiar kupic ${answers[0]}, ten produkt ${answers[1]} mojemu budżetowi. ${question[2]} jest niezbędny dla mnie. ${answers[3]} sprawdziłem opinie w internecie. W skali od 1 do 10 ważność tego produktu dla mnie oceniam na ${answers[4]}, na podstawie tych informacji prosze odpowiedz mi w kilku punktach za i przeciw zakupowi tego produktu.`,
+                content: `Oto informacje dotyczące mojej decyzji o zakupie produktu ${auctionTitle}: 'Czy jest Ci to naprawdę potrzebne?'. ${answers[0]}. 'Czy stać Cię na to bez nadszarpnięcia budżetu?'. ${answers[1]}. 'Czy przeprowadziłeś wystarczający research?'  ${answers[2]}. 'Czy produkt jest wysokiej jakości?' ${answers[3]}. 'Czy mogę znaleźć lepszą ofertę gdzie indziej?' ${answers[4]}. Czy, biorąc pod uwagę te informacje, powinienem dokonać zakupu? Zwróć prosze obiekt JSON [
+    {
+      rating: ...,
+      summary: ..., }
+  ], gdzie w rating ocenisz ogolnie zakup od 1 do 5 a w summary dasz krotki opis po polsku czy powinienem dokonac zakupu. `,
               },
             ],
           }),
@@ -64,7 +91,9 @@ const FormComponent = () => {
       )
 
       const data = await response.json()
-      setGptAnswer(data.choices[0].message.content)
+      const parsedData = JSON.parse(data.choices[0].message.content)
+      setGptAnswer(parsedData)
+      console.log(gptAnswer)
     } catch (error) {
       console.error('Błąd:', error)
     }
@@ -76,24 +105,37 @@ const FormComponent = () => {
       {isLoading && (
         <span className="loading loading-spinner text-success w-20 h-20"></span>
       )}
-      {gptAnswer && <Summary />}
+      {gptAnswer && <Summary gptAnswer={gptAnswer} />}
       {showForm && (
         <>
           <FormSteps currentStep={currentStep} />
           <h2>{question[currentStep]}</h2>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col w-full gap-y-4"
+            className="flex flex-col gap-y-4"
           >
-            <textarea
+            <select
               {...register('answer', { required: true })}
-              className="textarea textarea-bordered"
-              placeholder="Napisz odpowiedź na pytanie..."
-            ></textarea>
+              onChange={(e) => {
+                setCurrentAnswer(e.target.value)
+                if (e.target.value !== 'Choose') {
+                  clearErrors('answer')
+                }
+              }}
+              className="select select-secondary w-full max-w-xs"
+            >
+              <option value="Choose">Wybierz odpowiedź</option>
+              <option value="Tak">Tak</option>
+              <option value="Nie">Nie</option>
+            </select>
             {errors.answer && (
-              <span className="text-error font-bold">Odpowiedz na pytanie</span>
+              <span className="text-error font-bold">
+                {errors.answer.message}
+              </span>
             )}
-            <button className="btn">Następne pytanie</button>
+            <button type="submit" className="btn">
+              Następne pytanie
+            </button>
           </form>
         </>
       )}
