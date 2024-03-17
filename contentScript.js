@@ -8,6 +8,7 @@ function dodajPrzyciskZdecyduj() {
     const title = document.title
     console.log(title)
     chrome.runtime.sendMessage({ action: 'title', title: title })
+    alert("Przejdz do rozszerzenia, pobraliśmy aukcję!")
   })
 
   const container = document.querySelector('#transaction-buttons-section')
