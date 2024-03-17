@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import FormSteps from './FormSteps.jsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import API_KEY from '../../../API/API.js'
 import { Summary } from '../Summary.jsx'
 
@@ -51,7 +51,6 @@ const FormComponent = ({ setShowSummary }) => {
       if (currentStep < question.length) {
         setCurrentStep(currentStep + 1)
         answers.push(data)
-
       }
       if (currentStep >= 8) {
         fetchGptResponse()
@@ -59,13 +58,13 @@ const FormComponent = ({ setShowSummary }) => {
     }
   }
 
-  // useEffect(() => {
-  //   chrome.runtime.onMessage.addListener((message) => {
-  //     if (message.action === 'title') {
-  //       setAuctionTitle(message.title)
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener((message) => {
+      if (message.action === 'title') {
+        setAuctionTitle(message.title)
+      }
+    })
+  }, [])
 
   async function fetchGptResponse() {
     const OPENAI_API_KEY = API_KEY
