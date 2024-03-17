@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Moja Wtyczka Chrome",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "vite.svg"
+    }
+  },
+  "host_permissions": [
+    "*://*.allegro.pl/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.allegro.pl/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ]
+}
