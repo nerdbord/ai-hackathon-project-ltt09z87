@@ -88,12 +88,12 @@ const FormComponent = ({ setShowSummary }) => {
     setShowForm(false)
     try {
       const response = await fetch(
-        'https://api.openai.com/v1/chat/completions',
+        'https://training.nerdbord.io/api/v1/openai/chat/completions',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${OPENAI_API_KEY}`,
+            Authorization: `${OPENAI_API_KEY}`,
           },
           body: JSON.stringify({
             model: 'gpt-3.5-turbo',
