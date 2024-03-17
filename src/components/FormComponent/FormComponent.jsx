@@ -12,17 +12,23 @@ const FormComponent = ({ setShowSummary }) => {
   const [showForm, setShowForm] = useState(true)
   // eslint-disable-next-line no-unused-vars
   const [question, setQuestion] = useState([
+    'Czy jest to impulsywny zakup?',
     'Czy jest Ci to naprawdę potrzebne?',
+    'Czy produkt ma dobre opinie? ',
     'Czy stać Cię na to bez nadszarpnięcia budżetu?',
     'Czy przeprowadziłeś wystarczający research?',
     'Czy produkt jest wysokiej jakości?',
     'Czy mogę znaleźć lepszą ofertę gdzie indziej?',
+    'Czy istnieje możliwość zwrotu lub wymiany?',
+    'Czy zakup ten wpisuje się w moje długoterminowe cele? ',
   ])
   const [currentStep, setCurrentStep] = useState(0)
   const [gptAnswer, setGptAnswer] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [currentAnswer, setCurrentAnswer] = useState('')
-  const [auctionTitle, setAuctionTitle] = useState('Pralka')
+  const [auctionTitle, setAuctionTitle] = useState(
+    'T-shirt męski okrągły dekolt rozmiar XXL'
+  )
 
   const {
     register,
@@ -42,12 +48,12 @@ const FormComponent = ({ setShowSummary }) => {
     } else {
       clearErrors('answer')
       reset()
-      if (currentStep < 5) {
+      if (currentStep < question.length) {
         setCurrentStep(currentStep + 1)
         answers.push(data)
-        console.log(answers)
+
       }
-      if (currentStep >= 4) {
+      if (currentStep >= 8) {
         fetchGptResponse()
       }
     }
@@ -79,11 +85,13 @@ const FormComponent = ({ setShowSummary }) => {
             messages: [
               {
                 role: 'user',
-                content: `Oto informacje dotyczące mojej decyzji o zakupie produktu ${auctionTitle}: 'Czy jest Ci to naprawdę potrzebne?'. ${answers[0]}. 'Czy stać Cię na to bez nadszarpnięcia budżetu?'. ${answers[1]}. 'Czy przeprowadziłeś wystarczający research?'  ${answers[2]}. 'Czy produkt jest wysokiej jakości?' ${answers[3]}. 'Czy mogę znaleźć lepszą ofertę gdzie indziej?' ${answers[4]}. Czy, biorąc pod uwagę te informacje, powinienem dokonać zakupu? Zwróć prosze obiekt JSON [
+                content: `Mam zamiar zakupić ${auctionTitle}. Zadałem sobie kilka pytań oto one: '${question[0]}' Odpowiedź ${answers[0]}. '${question[1]}' Odpowiedź: ${answers[1]}. '${question[2]}' Odpowiedź  ${answers[2]}. '${question[3]}' Odpowiedź ${answers[3]}. '${question[4]}' Odpowiedź: ${answers[4]}. '${question[5]}'. Odpowiedź: ${answers[5]}. '${question[6]}'. Odpowiedź: ${answers[6]}. '${question[7]}'. Odpowiedź: ${answers[7]}. '${question[8]}'. Odpowiedź: ${answers[8]}. '${question[9]}'. Odpowiedź: ${answers[9]}. 
+                
+                Czy, biorąc pod uwagę te informacje, powinienem dokonać zakupu? Zwróć prosze obiekt JSON [
     {
       rating: ...,
       summary: ..., }
-  ], gdzie w rating ocenisz ogolnie zakup od 1 do 5 a w summary dasz krotki opis po polsku czy powinienem dokonac zakupu. `,
+  ], gdzie w rating ocenisz ogolnie zakup od 1 do 5 a w summary dasz swoje spostrzezenia odnosnie dokonania zakupu, czy jest sensowny, impuslywny czy powineinem sie wstrzymac czy moge w danej chwili go kupic. Daj ładny opis z nazwą produktu który chce zakupić i z decyzjami na które powinienem zwrócić uwage bazując na moich odpowiedziach`,
               },
             ],
           }),

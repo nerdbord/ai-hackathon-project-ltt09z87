@@ -1,5 +1,3 @@
-import GPTRED from '../assets/gptred.svg'
-import GPTGREEN from '../assets/gptgreen.svg'
 import { useState } from 'react'
 
 export const Summary = ({ gptAnswer }) => {
