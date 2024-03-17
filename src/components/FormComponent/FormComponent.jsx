@@ -26,9 +26,25 @@ const FormComponent = ({ setShowSummary }) => {
   const [gptAnswer, setGptAnswer] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [currentAnswer, setCurrentAnswer] = useState('')
-  const [auctionTitle, setAuctionTitle] = useState(
-    'T-shirt męski okrągły dekolt rozmiar XXL'
-  )
+   const [auctionTitle, setAuctionTitle] = useState("");
+
+  useEffect(() => {
+    fetchAuctionTitle();
+  }, []); 
+
+  const fetchAuctionTitle = async () => {
+    try {
+      const response = await fetch('https://kamil-banaszek.pl/projekt/pobierz');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setAuctionTitle(data.nazwa);
+    } catch (error) {
+      console.error('There was a problem fetching the auction title:', error);
+    }
+  };
+
 
   const {
     register,
